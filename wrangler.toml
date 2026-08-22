@@ -1,0 +1,16 @@
+name = "deslop"
+main = "src/index.js"
+compatibility_date = "2025-06-01"
+
+[vars]
+# instagram module (served at /instagram/)
+INSTAGRAM_TARGET_URL = "https://www.instagram.com/direct/inbox/"
+# server: manifest start_url is /instagram/launch, which 302s to the target.
+#   Redirect chains from the launch navigation stay inside the chromeless
+#   web app window (WebKit behavior since the iOS 12.2 OAuth fix).
+# client: manifest start_url is /instagram/, and the page script detects
+#   standalone mode and calls location.replace(target).
+# If server mode ejects you into a Safari sheet on your iOS version, switch
+# to client, redeploy, and remove and re-add the Home Screen icon (iOS reads
+# the manifest at install time only).
+INSTAGRAM_REDIRECT_MODE = "server"
